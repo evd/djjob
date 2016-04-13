@@ -147,10 +147,8 @@ class DJBase {
                 $stmt->execute($params);
 
                 $ret = array();
-                if ($stmt->rowCount()) {
-                    // calling fetchAll on a result set with no rows throws a
-                    // "general error" exception
-                    foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $r) $ret []= $r;
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $ret[] = $row;
                 }
 
                 $stmt->closeCursor();
